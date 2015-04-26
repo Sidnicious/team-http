@@ -7,15 +7,25 @@ CXXFLAGS +=\
 	 -Wpedantic\
 	 -Werror\
 	-D_XOPEN_SOURCE=1\
-	-I../include\
+	-Iinclude\
 	-framework CoreFoundation\
 	-framework CoreServices\
-	../deps/http-parser/http_parser_g.o\
-	../deps/uv/libuv.a
+	deps/http-parser/http_parser_g.o\
+	deps/uv/libuv.a
 
 CXXFLAGS += -g
 
-examples: $(EXAMPLES)
+all: $(EXAMPLES)
 
-bin/%: %.cpp ../include/team util.h
+bin/%: %.cpp include/team util.h deps/http-parser/http_parser_g.o deps/uv/libuv.a
 	$(CXX) $(CXXFLAGS) -o $@ $<
+
+
+deps/http-parser/http_parser_g.o: deps/http-parser/Makefile
+	$(MAKE) -C $(@D)
+
+deps/uv/libuv.a: deps/uv/Makefile
+	$(MAKE) -C $(@D)
+
+deps/uv/Makefile deps/http-parser/Makefile:
+	git submodule init && git submodule update
