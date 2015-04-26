@@ -8,16 +8,17 @@ CXXFLAGS +=\
 	 -Werror\
 	-D_XOPEN_SOURCE=1\
 	-Iinclude\
+	-I../include\
 	-framework CoreFoundation\
 	-framework CoreServices\
 	deps/http-parser/http_parser_g.o\
-	deps/uv/libuv.a
+	deps/uv/libuv.la
 
 CXXFLAGS += -g
 
 all: $(EXAMPLES)
 
-bin/%: %.cpp include/team util.h deps/http-parser/http_parser_g.o deps/uv/libuv.a
+bin/%: %.cpp ../include util.h deps/http-parser/http_parser_g.o deps/uv/libuv.la
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
 

@@ -1,6 +1,9 @@
 [submodule "deps/uv"]
 	path = examples/deps/uv
-	url = git://github.com/joyent/libuv.git
+	url = git://github.com/libuv/libuv.git
 [submodule "deps/http-parser"]
 	path = examples/deps/http-parser
 	url = git://github.com/joyent/http-parser.git
+[submodule "examples/deps/team"]
+	path = examples/deps/team
+	url = git://github.com/Sidnicious/team
